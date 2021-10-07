@@ -8,14 +8,14 @@ type(of: dict)
 
 let emptyDict: [String: String] = [:]
 
-let dict1: Dictionary<String, Int>
-let dict2: [String: Int]
+let dict1 = Dictionary<String, Int>()
+let dict2 = [String: Int]()
 
 
 // MARK: - Create
-let words = ["A": "Apple", "B":"Banana", "C": "City"]
-let emptyDict1: [String: String] = [:]
+let words = ["A": "Apple", "B": "Beepeach", "C": "Cyber"]
 
+let emptyDict1: [String: String] = [:]
 let emptyDict2 = [String: String]()
 let emptyDict3 = Dictionary<String, String>()
 
@@ -26,10 +26,20 @@ words.count
 words.isEmpty
 emptyDict.isEmpty
 
-words["A"]
-
 // Dictionary is optional
+words["A"]
+type(of: words["A"])
 words["Apple"]
+
+let a = words["E"]
+type(of: a)
+let b = words["E", default: "Empty"]
+type(of: b)
+
+
+for (key, value) in words {
+    print("key is '\(key)' and value is '\(value)'")
+}
 
 for key in words.keys {
     print(key)
@@ -46,12 +56,17 @@ for sortedKey in words.keys.sorted() {
 let keys = Array(words.keys)
 let values = Array(words.values)
 
+// Keys is not Array!!
+var array: [String] = []
+// array = words.keys
+
 
 // MARK: - Update
-let a = words["E"]
-type(of: a)
-let b = words["E", default: "Empty"]
-type(of: b)
+
+let e = words["E"]
+let defaultE = words["E", default: "Empty"]
+
+print(words)
 
 var names = [String: String]()
 names["B"] = "Beepeach"
@@ -66,6 +81,10 @@ names
 
 names.updateValue("Zelda", forKey: "Z")
 names.updateValue("Zee", forKey: "Z")
+
+if let oldValue = names.updateValue("PeachBee", forKey: "P") {
+    print("The old value '\(oldValue)' was replaced with a new value")
+}
 
 
 // MARK: - Delete
@@ -91,11 +110,11 @@ let right = ["B": "Beepeach", "L": "Link", "Z": "Zelda"]
 left == right
 left != right
 
-let lowerRight = ["B": "beepeach", "L": "link", "Z": "zelda"]
-right == lowerRight
+let lowerDict = ["B": "beepeach", "L": "link", "Z": "zelda"]
+right == lowerDict
 
 // Wrong case
-right.elementsEqual(lowerRight) { (lhs, rhs) -> Bool in
+right.elementsEqual(lowerDict) { (lhs, rhs) -> Bool in
     print(lhs.key, rhs.key)
     return lhs.key.caseInsensitiveCompare(rhs.key) == .orderedSame && lhs.key.caseInsensitiveCompare(rhs.key) == .orderedSame
 }
@@ -129,3 +148,10 @@ firstElement?.key
 firstElement?.value
 
 left.filter(c)
+
+// Dictionary's index value is not optional!
+let firstIndex = left.firstIndex(where: c)
+
+if let index = firstIndex {
+    print("\(left[index].value) contains 'e' ")
+}
