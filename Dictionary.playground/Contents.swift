@@ -113,10 +113,15 @@ left != right
 let lowerDict = ["B": "beepeach", "L": "link", "Z": "zelda"]
 right == lowerDict
 
+left.elementsEqual(right) { (lhs, rhs) -> Bool  in
+    print(lhs, rhs)
+    return lhs == rhs ? true : false
+}
+
 // Wrong case
 right.elementsEqual(lowerDict) { (lhs, rhs) -> Bool in
     print(lhs.key, rhs.key)
-    return lhs.key.caseInsensitiveCompare(rhs.key) == .orderedSame && lhs.key.caseInsensitiveCompare(rhs.key) == .orderedSame
+    return lhs.key.caseInsensitiveCompare(rhs.key) == .orderedSame && lhs.value.caseInsensitiveCompare(rhs.value) == .orderedSame
 }
 
 // Correct case
@@ -148,10 +153,26 @@ firstElement?.key
 firstElement?.value
 
 left.filter(c)
-
 // Dictionary's index value is not optional!
+
+
 let firstIndex = left.firstIndex(where: c)
 
 if let index = firstIndex {
     print("\(left[index].value) contains 'e' ")
+    left[index]
 }
+
+
+let testArray = [1, 2, 3, 4, 5]
+testArray[1]
+
+let testDict = ["A": "Apple", "S": "Samsung", "M": "Microsoft"]
+
+if let index = testDict.firstIndex(where: { $0.0 == "A" }) {
+    print(index)
+    print("\(testDict[index].value)'s key is A")
+    testDict[index].key
+    testDict[index].value
+}
+
