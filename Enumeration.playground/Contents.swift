@@ -60,22 +60,22 @@ case .west:
 // MARK: - Raw Value
 
 // 주로 Objective-C와 호환을 위해 Int로 하는게 좋다.
-enum PhoneError: Int {
-    case unknown
-    case batteryLevelLow
-    case outOfMemory = 100
-    case missingPowerConnection
-}
-
-PhoneError.unknown.rawValue
-PhoneError.batteryLevelLow.rawValue
-PhoneError.outOfMemory.rawValue
-PhoneError.missingPowerConnection.rawValue
-
-// PhoneError.unknown.rawValue = 999
-PhoneError(rawValue: 0)
-PhoneError(rawValue: 100)
-PhoneError(rawValue: 1000)
+//enum PhoneError: Int {
+//    case unknown
+//    case batteryLevelLow
+//    case outOfMemory = 100
+//    case missingPowerConnection
+//}
+//
+//PhoneError.unknown.rawValue
+//PhoneError.batteryLevelLow.rawValue
+//PhoneError.outOfMemory.rawValue
+//PhoneError.missingPowerConnection.rawValue
+//
+//// PhoneError.unknown.rawValue = 999
+//PhoneError(rawValue: 0)
+//PhoneError(rawValue: 100)
+//PhoneError(rawValue: 1000)
 
 
 enum Weekday: String {
@@ -101,27 +101,143 @@ enum Platform: Character {
 
 // MARK: - Associdated Value
 
-enum VideoInterface {
-    case dvi(width: Int, height: Int)
-    case hdmi(Int, Int, Double, Bool)
-    case displayPort(CGSize)
+enum EnumType {
+    case enumcase1(Int)
+    case enumcase2(String, Int)
+    case enumcase3(size: CGSize, name: String)
+    case enumcase4(Int, Int, Int, Int, Int)
 }
-// raw value와 함께 사용할 수 없다.
 
-var input = VideoInterface.dvi(width: 2048, height: 1536)
+
+// raw value와 함께 사용할 수 없다.
+enum Transportation {
+    case taxi(number: String)
+    case bus(number: Int, isRed: Bool)
+    case subway(line: Int, isExpress: Bool)
+    case airplane(Float, String)
+}
+
+var transportation: Transportation = .bus(number: 7200, isRed: true)
 
 // Enumeration case pattern
-switch input {
-case .dvi(2048, 1536):
-    print("dvi 2048 x 1536")
-case .dvi(2048, _):
-    print("dvi 2048 x Any")
-case .hdmi(let witdh, let height, let version, var audioEnalbed):
-    audioEnalbed = false
-    print(witdh, height, version, audioEnalbed)
+switch transportation {
+case .taxi(number: "12가 1234"):
+    print("Taxi number is 12가 1234")
+case .bus(number: 7200, isRed: true):
+    print("Bus is 7200 red bus")
+case .bus(_, isRed: true):
+    print("Bus is red bus")
+case .subway:
+    print("Is subway")
+case .airplane(_, var destination):
+    destination += "!"
+    print("Airplane's destination is \(destination)")
+case let .airplane(price, destination) where price > 1000:
+    print("\(destination) Airplane's tiket is expensive than 1000")
 default:
-    print("Default")
+    break
 }
 
-input = .hdmi(3840, 2160, 2.1, true)
+transportation = .airplane(1000000.0, "Canada")
+transportation = .taxi(number: "33삼3333")
+// MARK: - Enumeration Case Pattern
 
+enum PhoneError {
+    case unknown
+    case batteryLevelLow(level: Int)
+    case outOfMemory(errorNum: Int, description: String)
+}
+
+var error: PhoneError = .batteryLevelLow(level: 20)
+
+switch error {
+case .unknown:
+    print("Unknown Error")
+case .batteryLevelLow(let level):
+    print("BetteryLevel is \(level)")
+case .outOfMemory(let num, var description):
+    description = "Editable"
+    print(num, description)
+case .outOfMemory(let myNumber, _):
+    print("Memory Error num is \(myNumber)")
+case let .outOfMemory(num, des):
+    print(num, des)
+}
+
+
+if case .batteryLevelLow(10) = error {
+    print("Battery Level is 10")
+}
+
+if case .outOfMemory(errorNum: 0, let des) = error {
+    print(des)
+}
+
+if case let .outOfMemory(0, des) = error {
+    print(des)
+}
+
+if case let .outOfMemory(_, des) = error {
+    print(des)
+}
+
+
+
+//let list = [
+//    Transportation.subway(lineNumber: 2, express: false),
+//    Transportation.bus(number: 4412),
+//    Transportation.subway(lineNumber: 7, express: true),
+//    Transportation.taxi(company: "Suwon", number: "1234")
+//]
+//
+//for case let .subway(n, _) in list {
+//    print("subway \(n)")
+//}
+//
+//for case let .subway(n, true) in list {
+//    print("\(n) is express")
+//}
+//
+//for case let .subway(n, true) in list where n == 2 {
+//    print("subway \(n)")
+//}
+
+
+//MARK: - CaseIterable Protocol
+
+enum Exam: Int, CaseIterable {
+    case zero = 100
+    case one
+    case two
+    case three
+}
+
+let rnd = Int.random(in: 0...3)
+Exam(rawValue: rnd)
+
+let random = Int.random(in: 0...Exam.allCases.count)
+
+Exam.allCases
+Exam.allCases.randomElement()
+
+
+// MARK: - Nonfrozem Enum
+
+enum ServiceType {
+    case onlineCourse
+    case offlineCamp
+    case onlineCamp
+}
+
+let selectedType = ServiceType.onlineCourse
+
+switch selectedType {
+case .onlineCourse:
+    print("")
+case .offlineCamp:
+    print("")
+case .onlineCamp:
+    print("")
+@unknown default:
+    break
+}
