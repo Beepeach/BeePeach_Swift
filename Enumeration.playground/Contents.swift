@@ -181,26 +181,37 @@ if case let .outOfMemory(_, des) = error {
     print(des)
 }
 
+//enum Transportation {
+//    case taxi(number: String)
+//    case bus(number: Int, isRed: Bool)
+//    case subway(line: Int, isExpress: Bool)
+//    case airplane(Float, String)
+//}
 
+let transportations: [Transportation] = [
+    .taxi(number: "12가 1234"),
+    .bus(number: 7200, isRed: true),
+    .bus(number: 720-3, isRed: false),
+    .subway(line: 1, isExpress: true),
+    .subway(line: 2, isExpress: false),
+    .subway(line: 7, isExpress: true)
+]
 
-//let list = [
-//    Transportation.subway(lineNumber: 2, express: false),
-//    Transportation.bus(number: 4412),
-//    Transportation.subway(lineNumber: 7, express: true),
-//    Transportation.taxi(company: "Suwon", number: "1234")
-//]
-//
-//for case let .subway(n, _) in list {
-//    print("subway \(n)")
-//}
-//
-//for case let .subway(n, true) in list {
-//    print("\(n) is express")
-//}
-//
-//for case let .subway(n, true) in list where n == 2 {
-//    print("subway \(n)")
-//}
+for case .bus(let num, true) in transportations {
+    print("\(num) bus is Red bus")
+}
+
+for case let .subway(1, isExpress) in transportations {
+    if isExpress {
+        print("Line1 is express")
+    } else {
+        print("No express")
+    }
+}
+
+for case let .taxi(num) in transportations where num.hasPrefix("12가") {
+    print("\(num) Taxi's number is started with 12가")
+}
 
 
 //MARK: - CaseIterable Protocol
