@@ -11,17 +11,25 @@ class ClassName {
     // subscript
 }
 
-class ClassPerson {
-    var name: String = "Beepeach"
-    var age: Int = 29
+class Dog {
+    let name: String
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
     
     func speak() {
-        print("Hello")
+        print("Mung!!")
     }
 }
 
-let p: ClassPerson = ClassPerson()
 
+let somsom: Dog = Dog(name: "SomSom", age: 11)
+somsom.name
+somsom.age
+somsom.speak()
 
 
 // MARK: - Struct
@@ -33,20 +41,19 @@ struct StructName {
     // subscript
 }
 
-struct StructPerson {
-    var name: String
+struct Cat {
+    let name: String
     var age: Int
     
     func speak() {
-        print("Hello")
+        print("Meow~")
     }
 }
 
-let person: StructPerson = StructPerson(name: "Beepeach", age: 29)
-person.name
-person.age
-person.speak()
-
+let tac: Cat = Cat(name: "Tac", age: 2)
+tac.name
+tac.age
+tac.speak()
 
 
 // MARK: - Initializer Syntax
@@ -77,3 +84,4 @@ position.y
 position = Position(value: 100)
 position.x
 position.y
+
