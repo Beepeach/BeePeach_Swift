@@ -3,5 +3,8 @@
     <pages>
         <page name='StoredProperty'/>
         <page name='ComputedProperty'/>
+        <page name='PropertyObserver'/>
+        <page name='Type Property'/>
+        <page name='selfAndSuper'/>
     </pages>
 </playground>
