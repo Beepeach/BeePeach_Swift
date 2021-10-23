@@ -6,5 +6,6 @@
         <page name='PropertyObserver'/>
         <page name='Type Property'/>
         <page name='selfAndSuper'/>
+        <page name='ValueAndReferenceType'/>
     </pages>
 </playground>
