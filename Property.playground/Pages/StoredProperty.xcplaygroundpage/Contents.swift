@@ -1,29 +1,32 @@
 import UIKit
 
 // MARK: - Property
-// let은 주로 선언에서 초기화를 해준다. 다른 값에 의존적이라면 init에서 초기화한다.
-
 
 // Instance Stored Property
-class Person {
-    let name: String = "Beepeach"
-    var age: Int = 100
+class Dog {
+    let name: String = "SomSom"
+    var age: Int = 11
 }
 
-let person = Person()
-person.name
-person.age
-person.age = 30
-// p.name = "Peach"
+let somsom: Dog = Dog()
+somsom.name
+somsom.age
 
-struct People {
-    let name: String = "Beepeach"
-    var age: Int = 100
+somsom.age = 12
+//somsom.name = "SumSum"
+
+
+struct Cat {
+    let name: String
+    var age: Int
 }
 
-let people = People()
-// people.age = 30
+let tac: Cat = Cat(name: "tac", age: 2)
 
+tac.name
+tac.age
+
+// tac.age = 3
 
 // MARK: - Lazy Stored Properties
 // 선언시점에 초기화를 시켜놔야한다.
@@ -39,22 +42,35 @@ struct Image {
 struct BlogPost {
     let title: String = "Title"
     let content: String = "Content"
-    lazy var attachment: Image = Image()
+    lazy var image: Image = Image()
     
-    let date: Date = Date()
-    
-    // lazy가 없다면 에러가 발생한다.
-    // 저장속성을 클로저로 초기화할때 다른 속성에 접근하려면 lazy로 해야한다.
-    lazy var formattedDate: String = {
-        let f = DateFormatter()
-        f.dateStyle = .long
-        f.timeStyle = .medium
-        
-        return f.string(from: date)
+    lazy var titleAndContent: String = {
+        let allContents: String = title + content
+
+        return allContents
     }()
 }
 
-// 인스턴스도 var이어야한다.
 var post = BlogPost()
-post.attachment
-post.formattedDate
+
+post.titleAndContent
+
+// 인스턴스도 var이어야한다.
+// let todayPost: BlogPost = BlogPost()
+// todayPost.titleAndContent
+
+
+//class BlogPost {
+//    let title: String = "Title"
+//    let content: String = "Content"
+//    lazy var image: Image = Image()
+//    
+//    lazy var titleAndContent: String = {
+//        let allContents: String = title + content
+//
+//        return allContents
+//    }()
+//}
+//
+//let todayPost: BlogPost = BlogPost()
+//todayPost.titleAndContent           // OK!!
