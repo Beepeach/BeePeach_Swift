@@ -116,4 +116,28 @@ struct ReadOnlyRect {
     }
 }
 
+
+// MARK: - Global And Local
+var width: Double = 10.0
+var height: Double = 10.0
+
+var area: Double {
+    return width * height
+}
+
+area
+
+func testComputedProperty() {
+    let width: Double = 15.0
+    let height: Double = 15.0
+
+    var area: Double {
+        return width * height
+    }
+    
+    print(area)
+}
+
+testComputedProperty()
+
 //: [Next](@next)

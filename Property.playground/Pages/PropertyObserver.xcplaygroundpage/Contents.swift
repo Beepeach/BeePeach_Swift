@@ -56,4 +56,35 @@ square.width = 20
 square.width = 20
 //20 will change 20
 //20 is changed by 20
+
+
+var width: Double = 10.0 {
+    willSet {
+        print("Width will change \(newValue)")
+    }
+    didSet {
+        print("\(oldValue) is changed by \(width) ")
+    }
+}
+
+width = 20
+// Width will change 20.0
+// 10.0 is changed by 20.0
+
+func testPropertyObserver() {
+    var width: Double = 15.0 {
+        willSet {
+            print("Width will change \(newValue)")
+        }
+        didSet {
+            print("\(oldValue) is changed by \(width) ")
+        }
+    }
+    
+    width = 20.0
+}
+
+testPropertyObserver()
+// Width will change 20.0
+// 15.0 is changed by 20.0
 //: [Next](@next)
