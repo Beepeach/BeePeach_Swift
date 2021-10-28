@@ -61,9 +61,8 @@ struct UserDefaultHelper<Value> {
 }
 
 struct Setting {
-    // why file
     @UserDefaultHelper(key: "initialValue", defaultValue: 1.0)
-    public var initialSpeed: Double
+    var initialSpeed: Double
     
     @UserDefaultHelper(key: "supportGesture", defaultValue: true)
     var supportGesture: Bool
