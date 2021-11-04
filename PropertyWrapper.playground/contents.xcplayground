@@ -3,5 +3,6 @@
     <pages>
         <page name='PropertyWrapper'/>
         <page name='AnotherExam'/>
+        <page name='DefaultsTest'/>
     </pages>
 </playground>
