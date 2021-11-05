@@ -146,71 +146,7 @@ struct NonAttributeAudio {
 }
 
 
-// MARK: -
-
-@propertyWrapper
-struct UserDefaultsHelper<Value> {
-    let key: String
-    let value: Value
-    
-    public var wrappedValue: Value {
-        get {
-            return UserDefaults.standard.object(forKey: self.key) as? Value ?? self.value
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: self.key)
-            print("Save")
-        }
-    }
-    
-    func remove() {
-        UserDefaults.standard.removeObject(forKey: key)
-        print("Remove")
-    }
-    
-    func reset() {
-        UserDefaults.standard.set(self.value, forKey: self.key)
-    }
-}
 
 
-struct SoundSetting {
-    @UserDefaultsHelper(key: "volume", value: 60)
-    var volume: Int
-    
-    @UserDefaultsHelper(key: "stereo", value: false)
-    var isStereo: Bool
-    
-    func removeAll() {
-        _volume.remove()
-        _isStereo.remove()
-    }
-    
-    func reset() {
-        _volume.reset()
-        _isStereo.reset()
-    }
-}
-
-var mySetting: SoundSetting = SoundSetting()
-mySetting.isStereo
-mySetting.volume
-
-UserDefaults.standard.value(forKey: "stereo")
-UserDefaults.standard.value(forKey: "volume")
-
-
-
-/*
-setting.isStereo = false
-setting.volume = 100
-UserDefaults.standard.value(forKey: "stereo")
-UserDefaults.standard.value(forKey: "volume")
-
-setting.removeAll()
-
-UserDefaults.standard.value(forKey: "stereo")
-UserDefaults.standard.value(forKey: "volume")
-*/
 
 //: [Next](@next)
