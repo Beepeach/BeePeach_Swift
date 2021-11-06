@@ -4,28 +4,47 @@ import UIKit
 // struct, class, enum 에서 구현가능
 // 호출시에 인스턴스이름 통해 호출한다.
 
-class Sample {
-    var data = 0
-    static var sharedData = 123
+struct Counter {
+    private var count: Int = 0
+    static let zero: Int = 0
     
-    func doSomething() {
-        print(data)
-        print(Self.sharedData)
-        print(Sample.sharedData)
+    public mutating func increse() {
+        self.count += 1
     }
     
-    func call() {
-        doSomething()
+    public mutating func increse(by amount: Int) {
+        self.count += amount
+    }
+    
+    public mutating func reset() {
+        count = 0
+    }
+    
+    public func getCount() -> Int {
+        return count
+    }
+    
+    public func printZero() {
+        print(Self.zero)
+        print(Counter.zero)
     }
 }
 
-let a: Sample = Sample()
-a.data
-Sample.sharedData
+var counter: Counter = Counter()
+// 0
+counter.increse()
+// 1
+counter.increse()
+// 2
+counter.increse(by: 10)
+// 12
 
-a.doSomething()
-a.call()
+counter.getCount()
+//12
+counter.reset()
+// 0
 
+counter.printZero()
 
 
 // MARK: - Mutating func
