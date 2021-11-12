@@ -11,25 +11,60 @@ class ClassName: SuperClassName {
 
 class Figure {
     var name: String = "Unknown"
-    
-    init(name: String) {
-        self.name = name
+    var description: String {
+        return "This Figure is \(self.name)"
     }
-    
     func draw() {
-        print("draw \(self.name)")
     }
 }
+
+let figure: Figure = Figure()
 
 class Circle: Figure {
     var radius: Double = 0.0
+    
+    override func draw() {
+        print("🔵")
+    }
+    
+    override var description: String {
+            return "This Circle is 🔵"
+    }
+    
+    // Error!!
+    // override var name: String = "Circle"
+    
+    override var name: String {
+        get {
+            return "Circle"
+        }
+        set {
+            super.name = newValue
+        }
+    }
 }
 
-// 생성자를 생성안했는데 사용할 수 있는 이유는 상속받아서 가능하다.
-let circle: Circle = Circle(name: "Circle")
-circle.radius
+let circle: Circle = Circle()
+circle.description
 circle.name
-circle.draw()
+
+class CustomCicle: Circle {
+    var isCustom: Bool = true
+    
+    override func draw() {
+        super.draw()
+        print("🔴")
+    }
+}
+
+let customCircle: CustomCicle = CustomCicle()
+customCircle.draw()
+// 🔵
+// 🔴
+
+
+
+
 
 // final keyword를 앞에 붙이면 상속이 금지된다.
 /*final*/ class Rectangle: Figure {
@@ -42,7 +77,7 @@ class Square: Rectangle {
     
 }
 
-
+/*
 // MARK: - Type Casting
 let figure: Figure = Figure(name: "Unknown")
 figure.name
@@ -135,4 +170,4 @@ for item in list {
     }
 }
 
-
+*/
