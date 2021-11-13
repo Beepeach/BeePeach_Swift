@@ -129,7 +129,7 @@ enum Planet: Int {
     case neptune
     
     static subscript(rawValue: Int) -> Planet? {
-        return Planet.init(rawValue: rawValue) ?? nil
+        return Planet.init(rawValue: rawValue)
     }
 }
 
