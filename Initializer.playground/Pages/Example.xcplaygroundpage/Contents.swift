@@ -3,23 +3,18 @@
 import Foundation
 
 class Position {
-    var width: Double
-    var height: Double
-    
-    init() {
-        self.width = 1.0
-        self.height = 1.0
-    }
+    var width: Double = 0.0
+    var height: Double = 0.0
     
     init(value: Double) {
-        width = value
-        height = value
+        self.width = value
+        self.height = value
     }
 }
 
-let position: Position = Position(value: 21.0)
-position.width
-position.height
+
+// let position: Position = Position()
+
 
 
 
