@@ -10,6 +10,7 @@ UInt.random(in: 0 ... 100)
 // UInt32
 arc4random()
 arc4random_uniform(100)
+arc4random_uniform(4)
 
 // Float
 Float.random(in: 1.0 ... 5.0)
