@@ -2,6 +2,7 @@
 
 import Foundation
 
+/*
 init(parameter) {
     statement
 }
@@ -9,5 +10,8 @@ init(parameter) {
 convenience init(parameter) {
     statement
 }
+*/
 
-//: [Next](@next)
+
+ 
+ //: [Next](@next)
