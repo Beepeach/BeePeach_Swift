@@ -10,5 +10,6 @@
         <page name='Example'/>
         <page name='DelegationInValueTypeExam'/>
         <page name='DesignatedAndConvenienceExam'/>
+        <page name='InheritanceAndOverride'/>
     </pages>
 </playground>
