@@ -11,5 +11,6 @@
         <page name='DelegationInValueTypeExam'/>
         <page name='DesignatedAndConvenienceExam'/>
         <page name='InheritanceAndOverride'/>
+        <page name='FailableInitExam'/>
     </pages>
 </playground>
