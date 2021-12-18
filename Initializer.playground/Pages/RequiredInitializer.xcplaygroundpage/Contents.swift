@@ -38,4 +38,36 @@ class Rectangle: Figure {
 }
 
 
+
+// MARK: - Exam
+
+class SomeClass {
+    init() {
+        
+    }
+}
+
+class SomeSubClass: SomeClass {
+    let depth: Int
+    
+    init(depth: Int) {
+        self.depth = depth
+    }
+    
+    required override init() {
+        self.depth = 1
+        super.init()
+    }
+}
+
+class SomeThirdSubClass: SomeSubClass {
+    let description: String
+    
+    required init() {
+        self.description = "This is ThirdSubClass"
+        super.init(depth: 2)
+    }
+}
+
+
 //: [Next](@next)
