@@ -9,6 +9,12 @@ import Darwin
 // 직접 호출할 수 없다.
 // 인스턴스가 제거될때 자동으로 호출된다.
 
+/* Syntax
+deinit {
+    code
+}
+*/
+
 class Size {
     var width = 0.0
     var height = 0.0
@@ -24,12 +30,12 @@ class Rect {
     var size = Size()
     
     deinit {
-        print("deinit \(self)")
+        print("deinit Rect(\(origin.x) \(origin.y))")
     }
 }
 
-var r: Rect? = Rect()
-r = nil
+var rect: Rect? = Rect()
+rect = nil
 
 
 
