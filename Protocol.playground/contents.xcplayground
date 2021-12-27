@@ -11,5 +11,6 @@
         <page name='OptionalProtocol'/>
         <page name='Extension'/>
         <page name='ProtocolExam'/>
+        <page name='InitSubscriptExam'/>
     </pages>
 </playground>

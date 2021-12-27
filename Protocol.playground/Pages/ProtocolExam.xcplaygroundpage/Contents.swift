@@ -44,6 +44,8 @@ protocol SomeProtocol {
     static var someTypeProperty: Int { get set }
 }
 
+// MARK: - Method
+
 
 protocol AnotherProtocol {
     func someInstanceMethod(name: String) -> String
@@ -79,6 +81,8 @@ enum OnOffSwitch: Togglable {
 var bathRoomSwitch: OnOffSwitch = OnOffSwitch.off
 bathRoomSwitch.toggle()
 print(bathRoomSwitch)
+
+
 
 
 
