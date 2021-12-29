@@ -12,5 +12,6 @@
         <page name='Extension'/>
         <page name='ProtocolExam'/>
         <page name='InitSubscriptExam'/>
+        <page name='ProtocolTypeExam'/>
     </pages>
 </playground>
