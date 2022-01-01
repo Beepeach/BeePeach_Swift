@@ -1,8 +1,6 @@
 //: [Previous](@previous)
 
-import UIKit
-
-UITableViewDelegate
+import Foundation
 
 protocol CustomRandomNumberGenerator {
     func random() -> Double
@@ -129,6 +127,91 @@ let traker = DiceGameTracker()
 let game = SnakeAndLadders()
 game.delegate = traker
 game.play()
+
+
+// MARK: - Collection of Protocol
+
+protocol Readable {
+    func read()
+}
+
+protocol Writable {
+    var content: String { get set }
+    func write(content: String)
+}
+
+protocol Vedio {
+    func play()
+}
+
+class VedioFile: Readable, Vedio {
+    let name: String
+    
+    func read() {
+        print("Read \(name)")
+    }
+    
+    func play() {
+        print("Play \(name)")
+    }
+    
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+class TextFile: Readable, Writable {
+    let name: String
+    var content: String = "Empty"
+    
+    func read() {
+        print("Read \(name): \(content)")
+    }
+    
+    func write(content: String) {
+        self.content = content
+        print("Done")
+    }
+    
+    init(_ name: String) {
+        self.name = name
+    }
+}
+
+let vedioFile1: VedioFile = VedioFile("vedioFile1")
+let vedioFile2: VedioFile = VedioFile("vedioFile2")
+
+let textFile1: TextFile = TextFile("textFile1")
+let textFile2: TextFile = TextFile("textFile2")
+
+let readables: [Readable] = [vedioFile1, vedioFile2, textFile1, textFile2]
+
+for readable in readables {
+    readable.read()
+    // readable.play()
+    //readable.write()
+}
+
+for readable in readables {
+    guard let vedioFile = readable as? Vedio else {
+        continue
+    }
+    
+    vedioFile.play()
+    
+    // ERROR!!
+    // vedioFile.read()
+}
+
+for readable in readables {
+    guard let vedioFile = readable as? VedioFile else {
+        continue
+    }
+    
+    vedioFile.play()
+    vedioFile.read()
+}
+
 
 
 
