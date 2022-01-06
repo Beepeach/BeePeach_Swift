@@ -15,5 +15,6 @@
         <page name='ProtocolTypeExam'/>
         <page name='InheritanceExam'/>
         <page name='CompositionExam'/>
+        <page name='OptionalExam'/>
     </pages>
 </playground>
