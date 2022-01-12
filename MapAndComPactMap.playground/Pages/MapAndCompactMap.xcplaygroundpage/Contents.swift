@@ -58,8 +58,6 @@ let result5 = ageString.flatMap(Int.init)
 
 // MARK: - map, flatMap을 이용한 구현
 
-// UIEvent -> IndexPath -> Model -> URL -> Data -> Model -> ViewModel -> View
-
 struct MyModel: Decodable {
     let name: String
 }
