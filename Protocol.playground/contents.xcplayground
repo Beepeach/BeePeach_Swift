@@ -16,5 +16,7 @@
         <page name='InheritanceExam'/>
         <page name='CompositionExam'/>
         <page name='OptionalExam'/>
+        <page name='Extension Exam'/>
+        <page name='Constraints'/>
     </pages>
 </playground>
