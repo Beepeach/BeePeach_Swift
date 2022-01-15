@@ -79,38 +79,25 @@ beepeach == somsom
 // false
 
 
-//// MARK: - Class
-//// 프로퍼티가 모두 채용했다고해도 기본으로 제공해주지 않는다
-//// 무엇을 비교할지 직접 구현해야한다.
-//// 특별한 이유가 없다면 모든 프로퍼티를 비교하도록 구현하는게 좋다.
-//
-//class Company {
-//    let name: String
-//
-//    init(name: String) {
-//        self.name = name
-//    }
-//}
-//
-//extension Company: Equatable {
-//    static func ==(lhs: Company, rhs:Company) -> Bool {
-//        return lhs.name == rhs.name
-//    }
-//}
-//
-//let apple: Company = Company(name: "Apple")
-//let kakao: Company = Company(name: "Kakao")
-//
-//apple == kakao
-//
-//apple === kakao
-//// false
-//
-//let companies: [Company] = [Company(name: "Apple"), Company(name: "MS"), Company(name: "Kakao")]
-//companies.contains(apple)
-//
-//
-//
-//companies.contains {
-//    $0.name == "Apple"
-//}
+// MARK: - Class
+// 프로퍼티가 모두 채용했다고해도 기본으로 제공해주지 않는다
+// 무엇을 비교할지 직접 구현해야한다.
+// 특별한 이유가 없다면 모든 프로퍼티를 비교하도록 구현하는게 좋다.
+
+// Company 구현은 위에 있다.
+let apple: Company = Company(name: "Apple")
+let kakao: Company = Company(name: "Kakao")
+
+apple == kakao
+
+apple === kakao
+// false
+
+let companies: [Company] = [Company(name: "Apple"), Company(name: "MS"), Company(name: "Kakao")]
+companies.contains(apple)
+
+
+
+companies.contains {
+    $0.name == "Apple"
+}
