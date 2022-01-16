@@ -52,15 +52,15 @@ extension Company: Equatable {
 }
 
 
-enum Transporation: Equatable {
+enum Transportation: Equatable {
     case taxi(company: Company)
     case bus(number: Int)
     case subway(line: Int, express: Bool)
     case airplane(departures: String, arrival: String)
 }
 
-let bus = Transporation.bus(number: 7002)
-let subway = Transporation.subway(line: 2, express: false)
+let bus = Transportation.bus(number: 7002)
+let subway = Transportation.subway(line: 2, express: false)
 
 subway == bus
 
