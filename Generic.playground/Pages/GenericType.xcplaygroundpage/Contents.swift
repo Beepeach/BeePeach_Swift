@@ -6,23 +6,75 @@ import Foundation
 // MARK: - Gereric Type
 
 // 기존 형식에 타입파라미터만 추가하면 된다.
-// 속성의 자료형, 메서드 리턴형, 파라미터 타입처럼 타입들을 타입파라미터로 대체할 수 있다.
+// 프로퍼티의 Type, 메서드의 Return Type, Parameter Type등 타입이 들어가는 곳이 타입파라미터로 대체될 수 있다.
 
 /*
-class Name<T> {
-    
+ class Name<T> {
+ let property: T
+ }
+ 
+ struct Name<T> {
+ func method(param: T) -> T {
+ code
+ }
+ }
+ 
+ enum Name<T> {
+ case one(associated: T)
+ }
+ */
+
+enum CustomEnum<T> {
+    case custom(associated: T)
 }
 
-struct Name<T> {
+struct IntStack {
+    var items: [Int] = []
     
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    
+    mutating func pop() -> Int? {
+        return items.popLast()
+    }
 }
 
-enum Name<T> {
+var intStack: IntStack = IntStack()
+intStack.push(10)
+intStack.push(20)
+
+intStack.pop()
+intStack.pop()
+intStack.pop()
+
+
+struct Stack<Element> {
+    var items: [Element] = []
     
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    
+    mutating func pop() -> Element? {
+        return items.popLast()
+    }
 }
-*/
- 
- 
+
+var stringStack: Stack<String> = Stack()
+stringStack.push("Bee")
+
+var doubleStack = Stack<Double>()
+doubleStack.push(3.14)
+
+// var errorStack = Stack()
+
+
+// MARK: - Extension으로 GenericType확장하기
+// 타입파라미터를 적어주지 않는다.
+// 오히려 적으면 에러가 난다.
+// 기존에 사용하던 타입파라미터를 그대로 사용한다.
+
 struct Color<T> {
     var red: T
     var green: T
@@ -33,17 +85,6 @@ var color: Color<Int> = Color(red: 100, green: 200, blue: 255)
 // color = Color(red: 10.0, green: 20.0, blue: 30.0)
 
 var doubleColor: Color<Double> = Color(red: 10.0, green: 20.0, blue: 30.0)
-
-
-// 지금까지 써왔던 GenericType 예시
-let array: Array<Int> = [1, 2, 3 ,4, 5]
-let dictionary: Dictionary<String, Int> = ["one": 1]
-
-
-// MARK: - Extension으로 GenericType확장하기
-// 타입파라미터를 적어주지 않는다.
-// 오히려 적으면 에러가 난다.
-// 기존에 사용하던 타입파라미터를 그대로 사용한다.
 
 extension Color {
     func getComponents() -> [T] {
