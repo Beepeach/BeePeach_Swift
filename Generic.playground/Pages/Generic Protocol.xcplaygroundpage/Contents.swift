@@ -1,71 +1,92 @@
 //: [Previous](@previous)
 
 import Foundation
+import Darwin
 
 // MARK: - Generic Protocol
 
 // 기존에 하던것처럼 <>로 선언하면 에러가 발생한다.
 
 /*
-protocol QueueCompatible<T> {
-    func enqueue(value: T)
-    func dequeue() -> T?
+protocol Container<Element> {
+    var count: Int { get }
+    mutating func append(_ item: Element)
+    subscript(i: Int) -> Element { get }
 }
-
 */
-
 
 // MARK: - Syntax
 
-// associatedtype Name
-
-protocol QueueCompatible {
+protocol Container {
     associatedtype Element
-    func enqueue(value: Element)
-    func dequeue() -> Element?
+    
+    var count: Int { get }
+    mutating func append(_ item: Element)
+    subscript(i: Int) -> Element? { get }
 }
 
-// 사용할때 associatedtype이름을 그대로 사용하면 당연히 에러가 난다.
 
-/*
-class IntegerQueue: QueueCompatible {
-    func enqueue(value: Element) {
+// MARK: - Usage
+// 사용할때 associatedtype 이름을 그대로 사용하면 당연히 에러가 난다.
+
+struct IntStack: Container {
+    typealias Element = Int
+    
+    var items: [Int] = []
+    
+    mutating func push(_ item: Int) {
+        items.append(item)
+    }
+    
+    mutating func pop() -> Int? {
+        return items.popLast()
+    }
+    
+    var count: Int {
+        return items.count
+    }
+    
+    mutating func append(_ item: Element) {
+        self.items.append(item)
+    }
+    
+    subscript(i: Int) -> Element? {
+        if i < items.count {
+            return items[i]
+        }
         
-    }
-    
-    func dequeue() -> Element? {
-        return 0
-    }
-}
-*/
-
-class DoubleQueue: QueueCompatible {
-    typealias Element = Double
-    func enqueue(value: Element) {
-
-    }
-    
-    func dequeue() -> Element? {
-        return 0.0
+        return nil
     }
 }
 
 
-// typealias를 생략하려면 이렇게 하면 된다.
-class IntegerQueue: QueueCompatible {
-    func enqueue(value: Int) {
+struct Stack<Element> {
+    var items: [Element] = []
+    
+    mutating func push(_ item: Element) {
+        items.append(item)
+    }
+    
+    mutating func pop() -> Element? {
+        return items.popLast()
+    }
+    
+    var count: Int {
+        return items.count
+    }
+    
+    mutating func append(_ item: Element) {
+        self.items.append(item)
+    }
+    
+    subscript(i: Int) -> Element? {
+        if i < items.count {
+            return items[i]
+        }
         
-    }
-    
-    func dequeue() -> Int? {
-        return 0
+        return nil
     }
 }
-
-
-// Type Constraint
-
-// associatedtype Name: Protocol
 
 
 
