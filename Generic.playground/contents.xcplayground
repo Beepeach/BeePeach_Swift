@@ -4,5 +4,6 @@
         <page name='GenetricFunction'/>
         <page name='GenericType'/>
         <page name='Generic Protocol'/>
+        <page name='Generic Extend'/>
     </pages>
 </playground>

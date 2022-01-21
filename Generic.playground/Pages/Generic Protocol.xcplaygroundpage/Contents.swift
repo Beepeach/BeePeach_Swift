@@ -60,7 +60,7 @@ struct IntStack: Container {
 }
 
 
-struct Stack<Element> {
+struct Stack<Element>: Container {
     var items: [Element] = []
     
     mutating func push(_ item: Element) {
@@ -87,6 +87,7 @@ struct Stack<Element> {
         return nil
     }
 }
+
 
 
 
