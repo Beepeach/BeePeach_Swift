@@ -12,26 +12,10 @@ struct Stack<Element> {
     mutating func pop() -> Element? {
         return items.popLast()
     }
-    
-    var count: Int {
-        return items.count
-    }
-    
-    mutating func append(_ item: Element) {
-        self.items.append(item)
-    }
-    
-    subscript(i: Int) -> Element? {
-        if i < items.count {
-            return items[i]
-        }
-        
-        return nil
-    }
 }
 
 /*
-Error
+// ERROR
 extension Stack<Element> {
     var topItem: Element? {
         return items.isEmpty ? nil : items[items.count - 1]
