@@ -3,7 +3,7 @@
 import Foundation
 
 // MARK: - Filter
-// 특정 조건에 맞게 걸러내느 역할을 한다.
+// 특정 조건에 맞게 걸러내는 역할을 합니다.
 // 새로운 컨테이너에 포함시키려면 true 버리려면 false
 
 let numbers: [Int] = [0, 1, 2, 3, 4, 5]
