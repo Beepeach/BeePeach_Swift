@@ -78,6 +78,6 @@ let charDict: [Character: Int] = letters.reduce(into: [:]) { counts, letter in
 print(charDict)
 
 
-
+Optional
 
 //: [Next](@next)

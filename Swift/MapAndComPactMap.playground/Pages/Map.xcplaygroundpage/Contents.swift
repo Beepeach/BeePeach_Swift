@@ -4,7 +4,6 @@ import Foundation
 
 // MARK: - map
 // 함수로 전달된 매개변수를 각각 요소에 적용시켜서 다시 반환시켜주는 메서드입니다.
-// Sequence와 Collection 프로토콜을 채용해야 Map을 사용할 수 있습니다.
 // 기존 데이터를 변형하는데 사용됩니다.
 let numbers: [Int] = [0, 1, 2, 3, 4]
 
@@ -53,7 +52,39 @@ let doubleEvenNumbers = evenNumbers.map(multiplyTwo)
 let doubleOddNumbers = oddNumbers.map(multiplyTwo)
 
 
-// MARK: - Optional과 만난다면??
+// MARK: - Optional
+
+func addFive(_ num: Int) -> Int {
+    return num + 5
+}
+
+var value: Int? = 2
+// ERROR!!
+// addFive(value)
+
+// map은 컨테이너에 담긴 값에 함수를 적용시킨후에 다시 컨테이너에 담아서 반환합니다.
+// 그래서 optional에 addFive 함수를 map의 파라미터로 전달하면 적용이 가능!
+value.map(addFive)
+value.map {
+    $0 + 5
+}
+
+value = nil
+value.map(addFive)
+
+func doubledEven(_ num: Int) -> Int? {
+    if num.isMultiple(of: 2) {
+        return num * 2
+    } else {
+        return nil
+    }
+}
+
+value = 4
+print(value.map(doubledEven))
+print(value.flatMap(doubledEven))
+
+
 
 
 //: [Next](@next)
