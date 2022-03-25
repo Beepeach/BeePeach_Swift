@@ -54,28 +54,3 @@ func validate(num: Int) throws {
     print("This positive num is less than 1000")
 }
 
-
-
-
-// MARK: - throw하는 함수를 호출하는 방법
-// 기본 함수처럼 그냥 호출할 수 없다.
-
-// ERROR!!
-// validate(num: 100)
-
-
-
-// try, try?, try!와 함께 사용해야한다.
-// try는 do catch와 함께 사용해야한다.
-// try?는 에러가 발생하면 nil을 리턴하게된다.
-
-// 그냥 호출하면 에러가 나는 예제
-// parsing(data: ["name": "Beepeach"])
-
-
-
-
-// MARK: - throw 함수를 처리하는 세가지 방법
-// 1. do - catch
-// 2. try? - optional Biding
-// 3. rethrow
