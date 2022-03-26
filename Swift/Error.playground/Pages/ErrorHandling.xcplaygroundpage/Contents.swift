@@ -76,9 +76,36 @@ func buyFavoritesDrink(client: String, vendingMachine: VendingMachine) throws {
 
 // MARK: - rethrows
 // 파라미터로 throws 함수가 전달됐을때 이 함수가 Error를 모두 처리하지 못하고 전파할때 rethrows 키워드를 사용합니다.
+enum MyError: Error {
+    case throwsError
+    case rethrowsError
+}
 
 
+func throwsFunction() throws {
+    throw MyError.throwsError
+}
 
+
+func rethrowsFunction(callback: () throws -> Void) rethrows {
+    try callback()
+}
+
+func anotherRethrowsFunction(callback: () throws -> Void) rethrows {
+    do {
+        try callback()
+    } catch {
+        throw MyError.rethrowsError
+    }
+    
+    // 파라미터로 전달한 함수가 아니라면 throw할 수 없습니다.
+    do {
+        try throwsFunction()
+    } catch {
+        // Error
+        // throw MyError.rethrowsError
+    }
+}
 
 // MARK: - 2. Do Catch Statement
 // do 는 필수 catch는 선택
