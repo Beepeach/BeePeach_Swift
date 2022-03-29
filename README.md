@@ -130,6 +130,13 @@
   + [Generic Extension](https://beepeach.tistory.com/578)
   + [Generic Type Constraint](https://beepeach.tistory.com/584)
 <br/>
+
++ Error Handling
+  + [Error Handling 기초](https://beepeach.tistory.com/685) 
+  + [throws](https://beepeach.tistory.com/686)
+  + [throws와 rethrows](https://beepeach.tistory.com/692)
+  + [do-catch, try? try!](https://beepeach.tistory.com/688)
+<br/>
   
 + 기타
   + [Reduce](https://beepeach.tistory.com/606)
