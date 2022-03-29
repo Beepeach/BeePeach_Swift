@@ -3,38 +3,42 @@
 import Foundation
 
 // MARK: - Optional Try
-// try는 do catch에서 사용해야한다.
-// try? try!는 그냥 사용할 수 있다.
-// 실패시 nil이 반환된다.
-// Error가 옵셔널값으로 변경되므로 바인딩과 함께 사용한다.
+// try? try!는 catch 또는 throws없이 사용할 수 있습니다.
+// 실패시 nil이 반환됩니다.
+// Error가 옵셔널값으로 변경되므로 바인딩과 함께 사용합니다.
 
-enum DataParsingError: Error {
-    case invalidType
-    case invalidField
-    case missingRequiredField(String)
+enum NumberError: Error {
+    case negativeNumber
 }
 
-func parsing(data: [String: Any]) throws {
-    guard let _ = data["name"] else {
-        throw DataParsingError.missingRequiredField("name")
-    }
+func someThrowingFunc() throws -> Int {
+    let number = Int.random(in: -5 ... 10)
     
-    guard let _ = data["age"] as? Int else {
-        throw DataParsingError.invalidType
+    if number < 0 {
+        throw NumberError.negativeNumber
+    } else {
+        return number
     }
 }
 
+let x = try? someThrowingFunc()
 
-// 두 코드는 같은 코드이다.
-if let _ = try? parsing(data: [:]) {
-    print("Success")
+let y: Int?
+do {
+    y = try someThrowingFunc()
+} catch {
+    y = nil
+}
+
+if let _ = try? someThrowingFunc() {
+    print("Sucess")
 } else {
     print("Fail")
 }
 
 do {
-    try parsing(data: [:])
-    print("Success")
+    try someThrowingFunc()
+    print("Sucess")
 } catch {
     print("Fail")
 }

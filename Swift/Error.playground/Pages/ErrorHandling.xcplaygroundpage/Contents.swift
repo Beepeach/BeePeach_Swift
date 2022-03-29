@@ -44,7 +44,7 @@ class VendingMachine {
             throw VendingMachineError.outOfStock
         }
         
-        guard insertedCoin < item.price else {
+        guard insertedCoin >= item.price else {
             throw VendingMachineError.insufficientFunds(coinsNeeded: item.price - insertedCoin)
         }
         
@@ -62,7 +62,7 @@ class VendingMachine {
 // try와 throws를 사용하면 됩니다,
 
 let favoriteDrink = [
-    "BeePeach": "Coca coala",
+    "BeePeach": "Coca cola",
     "Judy": "Ice tea",
     "SomSom": "Water"
 ]
@@ -170,11 +170,11 @@ try rethrowsFunction(callback: throwsFunc)
 
 // MARK: - 2. Do Catch Statement
 // do 는 필수 catch는 선택
-// try를 안에 작성하여 에러가 발생할 수 있는 코드를 실행시킨다.
-// Error가 발생하면 catch 에서 처리한다.
-// do-catch문을 포함한 함수가 throws를 하지않는다면 모든 에러를 처리해야한다.
-// throws를 포함한다면 모든 에러를 처리하지 않아도된다.
-// else if문처럼 가장 까다로운 조건부터 처리해줘야한다.
+// try를 안에 작성하여 에러가 발생할 수 있는 코드를 실행시킵니다.
+// Error가 발생하면 catch 에서 처리합니다.
+// do-catch문을 포함한 함수가 throws를 하지않는다면 모든 에러를 처리해야합니다.
+// throws를 포함한다면 모든 에러를 처리하지 않아도됩니다.
+// else if문처럼 가장 까다로운 조건부터 처리해줘야합니다.
 
 /*
 do {
@@ -195,88 +195,33 @@ do {
 }
 */
 
-enum DataParsingError: Error {
-    case invalidType
-    case invalidField
-    case missingRequiredField(String)
-}
+var vendingMachine = VendingMachine()
+vendingMachine.insertedCoin = 1000
 
-func parsing(data: [String: Any]) throws {
-    guard let _ = data["name"] else {
-        throw DataParsingError.missingRequiredField("name")
-    }
+func buyFavoritesDrinks(client: String, vendingMachine: VendingMachine) {
+    let drinkName = favoriteDrink[client] ?? "Sprite"
     
-    guard let _ = data["age"] as? Int else {
-        throw DataParsingError.invalidType
-    }
-    
-    print("Success!!")
-}
-
-
-// 사용 예제
-do {
-    try parsing(data: [:])
-} catch DataParsingError.invalidType {
-    print("ERROR: InvalidType")
-} catch {
-    print("ERROR: Another Error")
-}
-
-
-// 만약 모든 에러를 처리하지 않았다면 에러가 발생한다.
-// 해결 방법은 해당 스코프가 에러를 던지도록 해서 에러를 전파할 수 있도록 해야한다.
-
-// 모든 에러를 catch하지 않은 예제
-/*
-func handleError() {
     do {
-        try parsing(data: [:])
-    } catch DataParsingError.invalidType {
-        print("ERROR: InvalidType")
-    }
-}
-*/
-
-func handleError() throws {
-    do {
-        try parsing(data: [:])
-    } catch DataParsingError.invalidType {
-        print("ERROR: InvalidType")
-    }
-}
-
-// pattern이 없는 catch에서는 error라는 변수가 제공된다.
-// error는 Error 프로토콜 타입이므로 타입캐스팅 후 사용하면 된다.
-func handleErrorWithNoPattern() {
-    do {
-        try parsing(data: [:])
+        try vendingMachine.vend(itemNamed: drinkName)
+        print("Get Drink!!")
+    } catch VendingMachineError.invalidSelection {
+        print("Invalind Selection")
+    } catch VendingMachineError.outOfStock {
+        print("Out of Stock")
+    } catch VendingMachineError.insufficientFunds(let coinsNeeded) {
+        print("Insert an additional \(coinsNeeded)won")
     } catch {
-        if let dataError = error as? DataParsingError {
-            switch dataError {
-            case .invalidType:
-                print("ERROR: InvalidType")
-            case .missingRequiredField(let field):
-                print("ERROR: Missing \(field)Field")
-            default:
-                print("ERROR")
-            }
-        }
+        print("Another Error: \(error)")
     }
 }
 
 
-// MARK: - Multi-pattern Catch
-// Swift5.3부터 사용가능
-// 여러 Error를 ,로 한번에 catch에서 처리할 수 있다.
+buyFavoritesDrinks(client: "BeePeach", vendingMachine: vendingMachine)
 
-do {
-    try parsing(data: [:])
-} catch DataParsingError.invalidType, DataParsingError.invalidField {
-    print("ERROR: Invalid error")
-} catch DataParsingError.missingRequiredField(let field) {
-    print("ERROR: Missing \(field)Field")
-}
+
+// 만약 catch문으로 모든 에러를 처리하지 않았다면 에러가 발생합니다.
+// 해결 방법은 throws를 이용해서 에러를 전파시켜야합니다.
+
 
  
 //: [Next](@next)
